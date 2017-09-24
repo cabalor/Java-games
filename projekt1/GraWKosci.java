@@ -12,24 +12,27 @@ public class GraWKosci {
 
 	public static void main(String[] args) {
 
-		System.out.println("GRA w Kosci v.0.5");
+		System.out.println("GRA w Kosci v.0.7");
 		Scanner scn = new Scanner(System.in);
+		game(scn);
+		scn.close();
+	}
+
+	
+	
+	public static void game(Scanner scn){
+		
+		while(true){
 		int[] gracz1 = new int[6];
 		int[] gracz2 = new int[6];
 
 		for (int i = 0; i < 6; i++) {
-			// System.out.print("nacisnij enter aby rzucic koscia");
-			// scn.nextLine();
 			gracz1[i] = kosc();
-			// System.out.print(kosc() + " ");
 		}
 
 		System.out.println();
 		for (int i = 0; i < 6; i++) {
-			// System.out.print("nacisnij enter aby rzucic koscia");
-			// scn.nextLine();
 			gracz2[i] = kosc();
-			// System.out.print(kosc() + " ");
 		}
 
 		Arrays.sort(gracz1);
@@ -74,18 +77,28 @@ public class GraWKosci {
 				}
 			}
 		}
-		System.out.println(Arrays.toString(gracz1));
-		System.out.println(Arrays.toString(gracz2));
+		Arrays.sort(gracz1);
+		Arrays.sort(gracz2);
+		System.out.println("wynik rzutow pierwszego gracza "+Arrays.toString(gracz1)+"\n");
+		System.out.println("wynik rzutow drugiego gracza "+Arrays.toString(gracz2)+"\n");
 
 		String g1 = sprawdzenie(gracz1);
 		String g2 = sprawdzenie(gracz2);
 
 		System.out.println("gracz 1 trafil " + g1);
 		System.out.println("gracz 2 trafil " + g2);
-		scn.close();
-	}
-
-	public static void wynik() {
+		System.out.println("do you want to play again? y/n");
+		scn.nextLine();
+		String answer = scn.nextLine();
+		if(answer.equals("y")||answer.equals("Y")){
+			System.out.println("new game");
+		} else if (answer.equals("n")||answer.equals("N")){
+			System.out.println("end");
+			System.exit(0);
+		}
+		
+		}
+		
 	}
 
 	public static int kosc() {
@@ -104,26 +117,47 @@ public class GraWKosci {
 			}
 		}
 		Collection<Integer> lista = new ArrayList<>();
+		Collection<Integer> lista2 = new ArrayList<>();
 		lista = counterMap.values();
+		lista2 = counterMap.keySet();
 		String str = lista.toString();
+		String str3 = lista2.toString();
 		String str2 = "";
-		if (str.contains("1") && str.contains("1") && str.contains("1") && str.contains("1")
-				&& str.contains("1") == true) {
-			str2 = "strit";
-		} else if (str.contains("2") && str.contains("2") == true) {
-			str2 = "dwie 2";
-		} else if (str.contains("2") && str.contains("3") == true) {
+		
+		if (str3.contains("1") && str3.contains("2") && str3.contains("3") && str3.contains("4")
+				&& str3.contains("5")== true) {
+			str2 = "maly strit";
+		} else if(str3.contains("2") && str3.contains("3") && str3.contains("4") && str3.contains("5")
+				&& str3.contains("6")== true){
+			str2 = "duzy strit";
+		} 
+		
+		else if (str.contains("2") && str.contains("3") == true) {
 			str2 = "full";
 		} else if (str.contains("3") == true) {
 			str2 = "3";
 		} else if (str.contains("4") == true) {
-			str2 = "karet";
+			str2 = "kareta";
 		} else if (str.contains("6") == true) {
 			str2 = "poker";
+		} else if(str.contains("2") && str.contains("2") == true){
+			str2 = "dwie 2";
 		} else if (str.contains("2") == true) {
 			str2 = "2";
 		}
 		return str2;
 	}
-
+	
+	public static void newGame(Scanner scn){
+		System.out.println("do you want to play again? y/n");
+		String answer = scn.nextLine();
+		if(answer.equals("y")||answer.equals("Y")){
+			System.out.println("new game");
+		} else if (answer.equals("n")||answer.equals("N")){
+			System.out.println("end");
+			System.exit(0);
+		}
+		
+	}
+	
 }

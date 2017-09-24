@@ -8,48 +8,67 @@ public class Oczko {
 	
 	public static void main(String[] args){
 	
-		System.out.println("oczko v0.5");
-		
-		int oczko = 21;
-		int wynik =0;
+		System.out.println("blackjack v0.7");
 		Scanner scn = new Scanner(System.in);
+		start(scn);
 		
-		do{
-			System.out.println("nacisnij eneter aby rzucic");
-			scn.nextLine();
-			int rzut = kosc();
-			System.out.println(rzut);
-			wynik = wynik+rzut;
-			if(wynik>=15){
-				System.out.println("czy chcesz dodac swoj rzut: T/N");
-				String s = scn.nextLine();
-				if(s.equals("T")){
-					wynik = wynik + rzut;
-				}else if (s.equals("N")){
-					//System.out.println("twoj wynik " + wynik);
-					wynik = wynik - rzut;
-					break;
-				}
-			} else {
-				//wynik = wynik+rzut;
-			}
-			System.out.println("twoj wynik "+wynik);
-			if(wynik>21){
-				System.out.println("przegrałes");
-				break;
-			}
-		}while(wynik!=oczko);
-		
-		if(wynik == oczko){
-		System.out.println("wygrales");}
-		else {
-			System.out.println("twoj wynik to "+ wynik);
-		}
 		scn.close();
 	}
-	public static int kosc() {
+	
+	
+	public static int dice() {
 		Random rnd = new Random();
 		int los = rnd.nextInt(5) + 1;
 		return los;
 	}
+	
+	public static void start(Scanner scn){
+		
+		
+		int result = 0;
+		while(true){
+			System.out.println("hit enter for next throw");
+			scn.nextLine();
+			int Throw= dice();
+			System.out.println(Throw);
+			result = result + Throw;
+			System.out.println("you result " + result);
+			if(result>=15){
+				System.out.println("do you want to add your throw: Y/N");
+				String s = scn.nextLine();
+				if(s.equals("Y")||s.equals("y")){
+					if(result>21){
+						System.out.println("you have lost");
+						newGame(scn, result);
+						result=0;
+					}if(result==21){
+						System.out.println("you have won");{
+						newGame(scn,result);
+						result=0;
+						}
+					}
+				} else if (s.equals("n")||s.equals("N")){
+					result = result - Throw;
+					newGame(scn, result);
+					result=0;
+				}
+			}
+		}	
+	}
+	
+	public static void newGame(Scanner scn, int result){
+		System.out.println("do you want to play again? y/n");
+		String answer = scn.nextLine();
+		if(answer.equals("y")||answer.equals("Y")){
+			System.out.println("you got "+result+" points");
+		} else if (answer.equals("n")||answer.equals("N")){
+			System.out.println("your result is "+ result);
+			System.exit(0);
+		}
+		
+	}
+	
+	
+	
+	
 }
