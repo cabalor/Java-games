@@ -1,17 +1,35 @@
 package projekt1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Oczko {
 
+	static List<Integer> scores = new ArrayList<>();
+
 	public static void main(String[] args) {
 
 		System.out.println("blackjack v0.75");
 		Scanner scn = new Scanner(System.in);
-		start(scn);
 
-		scn.close();
+		while (true) {
+			System.out.println("what do you want  to do \n 1 for game \n 2 for scores \n 3 for exit");
+			String s = scn.nextLine();
+			switch (s) {
+			case "1":
+				start(scn);
+			case "2":
+				show(scores);
+			case "3":
+				System.exit(0);
+			}
+
+			start(scn);
+			scn.close();
+		}
+
 	}
 
 	public static int dice() {
@@ -44,25 +62,40 @@ public class Oczko {
 				}
 
 				else if (s.equals("n") || s.equals("N")) {
-
 					System.out.println("your result " + result);
-					newGame(scn, result);
+					scores.add(result);
 					result = 0;
-				}
-
-				if (result > 21) {
-					System.out.println("you have lost");
-					newGame(scn, result);
-					result = 0;
-				}
-				if (result == 21) {
-					System.out.println("you have won");
-					{
-						newGame(scn, result);
-						result = 0;
+					System.out
+							.println("Do you want to play again or see your scores \n 1 for new game \n 2 for sccores");
+					s = scn.nextLine();
+					switch (s) {
+					case "1": {
+						System.out.println("-------new game------");
+						break;
+					}
+					case "2": {
+						show(scores);
+						System.out.println("----new game -----");
+						break;
+					}
 					}
 				}
 
+			}
+
+			if (result > 21) {
+				System.out.println("you have lost");
+				newGame(scn, result);
+				scores.add(result);
+				result = 0;
+			}
+			if (result == 21) {
+				System.out.println("you have won");
+				{
+					newGame(scn, result);
+					scores.add(result);
+					result = 0;
+				}
 			}
 		}
 
@@ -75,6 +108,13 @@ public class Oczko {
 		} else if (answer.equals("n") || answer.equals("N")) {
 			System.out.println("your result is " + result);
 			System.exit(0);
+		}
+
+	}
+
+	public static void show(List<Integer> list) {
+		for (Integer i : list) {
+			System.out.println("wynik " + i);
 		}
 
 	}
