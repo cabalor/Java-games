@@ -17,11 +17,13 @@ public class Oczko {
 		while (true) {
 			System.out.println("what do you want  to do \n 1 for game \n 2 for scores \n 3 for exit");
 			String s = scn.nextLine();
-			menu(s, scn);
-			
-			scn.close();
+			try{
+			 menu(s, scn);} catch (IllegalStateException e){
+				 System.out.println("wybierz raz jeszcze!");
+				 menu(s,scn);
+			 }	
 		}
-
+		
 	}
 
 	public static int dice() {
