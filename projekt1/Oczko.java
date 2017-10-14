@@ -17,16 +17,8 @@ public class Oczko {
 		while (true) {
 			System.out.println("what do you want  to do \n 1 for game \n 2 for scores \n 3 for exit");
 			String s = scn.nextLine();
-			switch (s) {
-			case "1":
-				start(scn);
-			case "2":
-				show(scores);
-			case "3":
-				System.exit(0);
-			}
-
-			start(scn);
+			menu(s, scn);
+			
 			scn.close();
 		}
 
@@ -119,4 +111,15 @@ public class Oczko {
 
 	}
 
+	public static  void menu(String s, Scanner scn){
+		if(s.equals("1")){
+			start(scn);
+		} else if(s.equals("2")) {
+			show(scores);
+		} else if(s.equals("3")){
+			System.exit(0);
+		}
+	}
+	
+	
 }
