@@ -36,7 +36,7 @@ public class Oczko {
 
 		int result = 0;
 		while (true) {
-			int Throw = dice();
+				int Throw = dice();
 			if (result < 15) {
 				System.out.println("hit enter for next throw");
 				scn.nextLine();
@@ -79,16 +79,18 @@ public class Oczko {
 
 			if (result > 21) {
 				System.out.println("you have lost");
-				newGame(scn, result);
+				//newGame(scn, result);
 				scores.add(result);
 				result = 0;
+				break;
 			}
 			if (result == 21) {
 				System.out.println("you have won");
 				{
-					newGame(scn, result);
+					//newGame(scn, result);
 					scores.add(result);
 					result = 0;
+					break;
 				}
 			}
 		}
@@ -100,8 +102,7 @@ public class Oczko {
 		String answer = scn.nextLine();
 		if (answer.equals("y") || answer.equals("Y")) {
 		} else if (answer.equals("n") || answer.equals("N")) {
-			System.out.println("your result is " + result);
-			System.exit(0);
+			System.out.println("your result was " + result);
 		}
 
 	}
