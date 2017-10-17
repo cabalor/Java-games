@@ -15,15 +15,16 @@ public class Oczko {
 		Scanner scn = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("what do you want  to do \n 1 for game \n 2 for scores \n 3 for exit");
+			System.out.println("what do you want to do \n 1 for game \n 2 for scores \n 3 for exit");
 			String s = scn.nextLine();
-			try{
-			 menu(s, scn);} catch (IllegalStateException e){
-				 System.out.println("wybierz raz jeszcze!");
-				 menu(s,scn);
-			 }	
+			try {
+				menu(s, scn);
+			} catch (IllegalStateException e) {
+				System.out.println("wybierz raz jeszcze!");
+				menu(s, scn);
+			}
 		}
-		
+
 	}
 
 	public static int dice() {
@@ -36,7 +37,7 @@ public class Oczko {
 
 		int result = 0;
 		while (true) {
-				int Throw = dice();
+			int Throw = dice();
 			if (result < 15) {
 				System.out.println("hit enter for next throw");
 				scn.nextLine();
@@ -60,26 +61,23 @@ public class Oczko {
 					scores.add(result);
 					result = 0;
 					System.out
-							.println("Do you want to play again or see your scores \n 1 for new game \n 2 for sccores");
+							.println("Do you want to play again or show your scores \n 1 for new game \n 2 for sccores");
 					s = scn.nextLine();
-					switch (s) {
-					case "1": {
-						System.out.println("-------new game------");
+					if(s.equals("1")){
+						System.out.println("---------------");
 						break;
-					}
-					case "2": {
+					} else if(s.equals("2")){
 						show(scores);
-						System.out.println("----new game -----");
+						System.out.println("--------------");
 						break;
 					}
-					}
+					
 				}
 
 			}
 
 			if (result > 21) {
 				System.out.println("you have lost");
-				//newGame(scn, result);
 				scores.add(result);
 				result = 0;
 				break;
@@ -87,7 +85,6 @@ public class Oczko {
 			if (result == 21) {
 				System.out.println("you have won");
 				{
-					//newGame(scn, result);
 					scores.add(result);
 					result = 0;
 					break;
@@ -114,15 +111,16 @@ public class Oczko {
 
 	}
 
-	public static  void menu(String s, Scanner scn){
-		if(s.equals("1")){
+	public static void menu(String s, Scanner scn) {
+		if (s.equals("1")) {
 			start(scn);
-		} else if(s.equals("2")) {
+		} else if (s.equals("2")) {
 			show(scores);
-		} else if(s.equals("3")){
+		} else if (s.equals("3")) {
 			System.exit(0);
 		}
 	}
+
 	
 	
 }
